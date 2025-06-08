@@ -9,6 +9,8 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     console:
       enabled:true
+  profiles:
+    active: default
 
 server:
   port: 8081

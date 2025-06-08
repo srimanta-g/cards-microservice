@@ -6,6 +6,8 @@ import com.example.cards.mapper.CardsMapper;
 import com.example.cards.repo.ICardsRepository;
 import com.example.cards.service.CardsService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cards")
 @AllArgsConstructor
+@NoArgsConstructor
 public class CardsController {
 
     private CardsService cardsService;
     private ICardsRepository iCardsRepository;
+
+    @Value("${custom.env}")
+    private String environmentType;
 
     @PostMapping("/create")
     public ResponseEntity<CardDto> createCard(@RequestBody CardDto cardDto) {
@@ -31,8 +37,8 @@ public class CardsController {
         return ResponseEntity.ok(this.cardsService.getCardsByMobileNumber(mobileNumber));
     }
 
+    @GetMapping("/get-config-details")
     public ResponseEntity<String> getConfigDetails() {
-        
-        return ResponseEntity.status(200).body("Config details are not available in this version.");
+        return ResponseEntity.status(200).body(environmentType);
     }
 }
