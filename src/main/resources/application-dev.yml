@@ -1,9 +1,0 @@
-custom:
-  env: dev
-  info:
-    name: Cards Service
-    description: A service for managing cards
-    version: 1.0.0
-    contact:
-      name: Srimanta Ganguly
-      email: srimantagangulu02@gamil.com

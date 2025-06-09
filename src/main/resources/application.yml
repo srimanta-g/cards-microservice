@@ -1,6 +1,8 @@
 spring:
   application:
-    name: cards
+    name: "cards"
+  config:
+    import: "optional:configserver:http://localhost:9090/"
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
@@ -10,17 +12,7 @@ spring:
     console:
       enabled:true
   profiles:
-    active: default
+    active: "prod"
 
 server:
   port: 8081
-
-custom:
-  env: default
-  info:
-    name: Cards Service
-    description: A service for managing cards
-    version: 1.0.0
-    contact:
-      name: Srimanta Ganguly
-      email: srimantagangulu02@gamil.com

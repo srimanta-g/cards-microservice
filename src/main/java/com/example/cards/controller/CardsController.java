@@ -1,12 +1,14 @@
 package com.example.cards.controller;
 
 import com.example.cards.dto.CardDto;
+import com.example.cards.dto.CardsConfigDetailsDto;
 import com.example.cards.entity.Card;
 import com.example.cards.mapper.CardsMapper;
 import com.example.cards.repo.ICardsRepository;
 import com.example.cards.service.CardsService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +25,8 @@ public class CardsController {
     private CardsService cardsService;
     private ICardsRepository iCardsRepository;
 
-    @Value("${custom.env}")
-    private String environmentType;
+    @Autowired
+    private CardsConfigDetailsDto cardsConfigDetailsDto;
 
     @PostMapping("/create")
     public ResponseEntity<CardDto> createCard(@RequestBody CardDto cardDto) {
@@ -38,7 +40,7 @@ public class CardsController {
     }
 
     @GetMapping("/get-config-details")
-    public ResponseEntity<String> getConfigDetails() {
-        return ResponseEntity.status(200).body(environmentType);
+    public ResponseEntity<CardsConfigDetailsDto> getConfigDetails() {
+        return ResponseEntity.status(200).body(cardsConfigDetailsDto);
     }
 }
